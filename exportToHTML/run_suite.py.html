@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>run_suite.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080; font-style: italic;}
+.s1 { color: #000000;}
+.s2 { color: #000080; font-weight: bold;}
+.s3 { color: #008080; font-weight: bold;}
+.s4 { color: #0000ff;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+run_suite.py</font>
+</center></td></tr></table>
+<pre><span class="s0"># 导包</span>
+<span class="s2">import </span>unittest
+<span class="s0"># 创建测试套件</span>
+<span class="s2">import </span>HTMLTestRunner_PY3
+
+<span class="s2">import </span>app
+<span class="s2">from </span>script.test_ihrm_employee_params <span class="s2">import </span>TestIHRMEmployee3
+<span class="s2">from </span>script.test_ihrm_login_params <span class="s2">import </span>TestIHRMLogin
+
+suite = unittest.TestSuite()
+<span class="s0"># 将测试用例添加到测试套件</span>
+suite.addTest(unittest.makeSuite(TestIHRMLogin))
+suite.addTest(unittest.makeSuite(TestIHRMEmployee3))
+<span class="s0"># 定义测试报告的名称</span>
+report_name = app.PATH + <span class="s3">&quot;/report/ihrm.html&quot;</span>
+<span class="s0"># 使用HTMLTestRunner_PY3生成测试报告</span>
+<span class="s2">with </span>open(report_name, <span class="s3">'wb'</span>) <span class="s2">as </span>f:
+    <span class="s0"># 实例化HTMLTestRunner_PY3</span>
+    runner = HTMLTestRunner_PY3.HTMLTestRunner(f,verbosity=<span class="s4">2</span>,title=<span class="s3">&quot;IHRM接口测试报告&quot;</span>, description=<span class="s3">&quot;这是人力资源管理系统的测试报告&quot;</span>)
+    <span class="s0"># 使用runner运行测试套件</span>
+    runner.run(suite)</pre>
+</body>
+</html>
